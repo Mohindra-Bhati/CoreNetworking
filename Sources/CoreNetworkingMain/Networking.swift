@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol BaseNetworkProtocol {
+public protocol BaseNetworkProtocol {
     func performNetworkRequest<T: ApiRequest>(_ request: T, completion: @escaping (Result<T.ResponseType, Error>) -> Void)
 }
 
-final class Networking: BaseNetworkProtocol {
-    static let shared = Networking()
+public final class Networking: BaseNetworkProtocol {
+    public static let shared = Networking()
     private init() {}
     
-    func performNetworkRequest<T: ApiRequest>(_ request: T, completion: @escaping (Result<T.ResponseType, Error>) -> Void) {
+    public func performNetworkRequest<T: ApiRequest>(_ request: T, completion: @escaping (Result<T.ResponseType, Error>) -> Void) {
         var urlRequest = URLRequest(url: request.urlWithQueries())
         urlRequest.httpMethod = request.method
         urlRequest.allHTTPHeaderFields = request.headers
